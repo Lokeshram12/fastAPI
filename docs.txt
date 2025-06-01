@@ -1,0 +1,11 @@
+pip install fastapi
+
+pip install uvicorn
+
+To run : uvicorn main:app --reload
+
+* **Uvicorn**: Uvicorn is a lightning-fast ASGI server used to run your FastAPI app in production; for example, you’d launch `uvicorn main:app --host 0.0.0.0 --port 8000` to serve a REST API for a mobile app’s backend. It ensures high-performance request handling and can be configured with multiple workers for real-time chat or IoT data ingestion.
+
+* **`from pydantic import BaseModel`**: `BaseModel` lets you define Python classes that automatically validate and parse incoming JSON payloads; for instance, a `User(BaseModel)` with fields `username: str` and `email: EmailStr` ensures that any signup request has both a proper username and a valid email before reaching your business logic. In a real-world ecommerce checkout, you’d use a `PaymentInfo(BaseModel)` to guarantee the credit card number, expiration date, and billing address are correctly formatted.
+
+* **`response_model`**: By specifying `response_model=UserOut` on a route, FastAPI automatically converts and validates the returned data against the `UserOut(BaseModel)` schema—e.g., you might return a `UserDB` that includes a hashed password but use `response_model=UserPublic` to expose only `id`, `name`, and `profile_image_url` to clients. In a social media API, you’d use `response_model` to omit private fields like `last_login` or `email_verified` when returning user profiles to third-party applications.
